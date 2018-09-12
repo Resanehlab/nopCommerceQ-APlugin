@@ -1,0 +1,136 @@
+﻿/* GLOBAL STYLES */
+
+.product-comments-page  {
+    display: block;
+    background-color: #f9f9f9;
+    padding: 40px;
+}
+
+/* THEME STYLES */
+
+
+#comment-form {
+	margin: 0 0 50px;
+}
+
+.product-comment-list {
+	margin: 0;
+}
+.product-comment-item {
+	border-top: 1px solid #eee;
+	border-bottom: none;
+    padding:25px;
+}
+.product-comment-item:last-child {
+	padding-bottom: 0;
+}
+
+.write-product-comment-button {
+    min-width: 150px;
+    height: 50px;
+    padding: 0 30px;
+    color: #fff;
+    text-transform: uppercase;
+    transition: opacity 0.2s ease;
+    background-color: #d8a843;
+    border: none;
+    cursor: pointer;
+}
+
+.write-product-comment-button:hover {
+    opacity: 0.9;
+}
+
+.write-comment .buttons {
+    border: none;
+    padding: 0;
+}
+
+.write-comment .inputs{
+    position: relative;
+    width: 440px;
+    max-width: 100%;
+    margin: 0 auto 15px;
+    text-align: center;
+    white-space: nowrap;
+    font-size: 0
+}
+
+.write-comment .inputs label{
+    display: block;
+    width: 100%;
+    margin: 0 0 10px;
+    text-align: center;
+    font-size: 14px;
+    color: #444;
+}
+
+.comment-item-head{
+    float: right;
+    width: 20%;
+    margin: 0;
+}
+
+.comment-item-head .comment-info{
+    margin: 0 0 10px;
+    width: 100%;
+    display: block;
+}
+
+.comment-item-head .user{
+    display: block;
+    padding: 0 0 0 15px;
+    margin: 0 0 20px;
+}
+
+.comment-item-head .date{
+    display: block;
+    margin: 0 0 5px;
+}
+
+.comment-content {
+    float: left;
+    width: 80%;
+    border: 0;
+}
+
+.comment-text{
+    margin: 0 0 20px;
+    color: #555;
+}
+
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
+
+.product-comment-helpfulness .vote{
+    font-weight:bold;
+    cursor:pointer;
+}
+
+.write-comment .message-error{
+    margin-bottom:20px;
+}
+
+.product-comment-helpfulness .result{
+    margin-right:10px;
+    font-weight: bold;
+}
+
+.submitCommentResult{
+    margin-bottom: 10px;
+    font-weight: bold;
+}
+
+.comment-content .reply{
+    background-color: #dadada;
+    margin: 15px 25px;
+    padding: 10px;
+    display:inline-block;
+}
+
+.comment-content .reply-text{
+    line-height: 30px;
+}

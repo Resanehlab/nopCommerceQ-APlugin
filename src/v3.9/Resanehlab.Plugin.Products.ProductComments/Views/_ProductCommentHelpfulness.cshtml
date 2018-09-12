@@ -1,0 +1,19 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentHelpfulnessModel
+
+@{
+    var commentId = Model.ProductCommentId;
+}
+
+<div class="product-comment-helpfulness"
+     data-productCommentId="@commentId"
+     data-productCommentVoteUrl="@Url.Action("SetProductCommentHelpfulness", "ProductComments")">
+    <span class="question">@T("Comments.Helpfulness.WasHelpful?")</span>
+    <span>
+        <span id="vote-yes-@commentId" class="vote vote-yes">@T("Common.Yes")</span>
+        <span id="vote-no-@commentId" class="vote vote-no">@T("Common.No")</span>
+    </span>
+    <span>
+        <span id="helpfulness-vote-yes-@commentId">@(Model.HelpfulYesTotal)</span>/(<span id="helpfulness-vote-no-@commentId">@(Model.HelpfulNoTotal)</span>)
+    </span>
+    <span id="helpfulness-vote-result-@commentId" class="result"></span>
+</div>

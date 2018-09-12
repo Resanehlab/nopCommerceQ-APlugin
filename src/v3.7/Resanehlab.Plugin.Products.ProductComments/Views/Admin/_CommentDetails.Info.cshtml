@@ -1,0 +1,71 @@
+﻿@using Nop.Web.Framework.ViewEngines.Razor
+@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentModel
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<script>
+    $(document).ready(function() {
+        $("#comment-edit").kendoTabStrip({
+            animation:  {
+                open: {
+                    effects: "fadeIn"
+                }
+            },
+            select: tabstrip_on_tab_select
+        });
+    });
+</script>
+
+<div id="comment-edit">
+    <ul>
+        <li @Html.RenderSelectedTabIndex(0, GetSelectedTabIndex())>
+            @T("Admin.Plugin.ProductComments.Info")
+        </li>
+    </ul>
+    <div class="tab-content">
+        @TabInfo()
+    </div>
+</div>
+
+@helper TabInfo()
+{
+    <table class="adminContent comment-info-tab">
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ProductName)
+            </td>
+            <td class="adminData">
+                <a href="@Url.RouteUrl("Product", new {SeName = Model.ProductSeName})" target="_blank">
+                    @Html.DisplayFor(model => model.ProductName)
+                </a>
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.CommentText)
+            </td>
+            <td class="adminData">
+                @Html.DisplayFor(model => model.CommentText)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.ReplyText)
+            </td>
+            <td class="adminData">
+                @Html.TextAreaFor(x => x.ReplyText)
+                @Html.ValidationMessageFor(model => model.ReplyText)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.NopLabelFor(model => model.IsApproved)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(x => x.IsApproved)
+                @Html.ValidationMessageFor(model => model.IsApproved)
+            </td>
+        </tr>
+    </table>
+}

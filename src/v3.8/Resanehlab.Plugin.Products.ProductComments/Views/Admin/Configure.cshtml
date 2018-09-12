@@ -1,0 +1,73 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = T("Admin.Plugin.ProductComments").Text;
+}
+@using System.Web.Mvc.Html
+@model Resanehlab.Plugin.Products.ProductComments.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@using Nop.Web.Framework.UI
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@{
+    Html.SetActiveMenuItemSystemName("Resanehlab.Plugin.Products.ProductComments.Configuration");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Plugin.ProductComments")
+
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            <div class="raw clearfix">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @T("Resanehlab.Plugin.Products.ProductComments.Configuration")
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.OverrideStoreCheckboxFor(model => model.EnablePlugin_OverrideForStore, model => model.EnablePlugin, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.EnablePlugin)
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.NopEditorFor(model => model.EnablePlugin)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.OverrideStoreCheckboxFor(model => model.ProductCommentsMustBeApproved_OverrideForStore, model => model.ProductCommentsMustBeApproved, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.ProductCommentsMustBeApproved)
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.NopEditorFor(model => model.ProductCommentsMustBeApproved)
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    @Html.OverrideStoreCheckboxFor(model => model.AllowAnonymousUsersToCommentProduct_OverrideForStore, model => model.AllowAnonymousUsersToCommentProduct, Model.ActiveStoreScopeConfiguration)
+                                    @Html.NopLabelFor(model => model.AllowAnonymousUsersToCommentProduct)
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.NopEditorFor(model => model.AllowAnonymousUsersToCommentProduct)
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

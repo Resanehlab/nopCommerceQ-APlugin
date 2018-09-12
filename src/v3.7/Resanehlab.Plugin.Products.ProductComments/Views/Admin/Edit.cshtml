@@ -1,0 +1,24 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentModel
+
+@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Admin.Plugin.ProductComments.EditCommentDetails").Text;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "admin-comment-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="section-header">
+        <div class="title">
+            @T("Admin.Plugin.ProductComments.EditCommentDetails")
+            (@Html.ActionLink(T("Admin.Plugin.ProductComments.BackToList").Text, "List"))
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+            <input type="submit" name="save-continue" class="k-button" value="@T("Admin.Common.SaveContinue")" />
+            <span id="comment-delete" class="k-button">@T("Admin.Common.Delete")</span>
+        </div>
+    </div>
+        @Html.Partial("~/Plugins/Resanehlab.ProductComments/Views/Admin/_CommentDetails.Info.cshtml", Model)
+}
+@Html.DeleteConfirmation("comment-delete")

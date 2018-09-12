@@ -1,0 +1,105 @@
+<Project Sdk="Microsoft.NET.Sdk">
+ <PropertyGroup Label="Globals">
+   <SccProjectName>SAK</SccProjectName>
+   <SccProvider>SAK</SccProvider>
+   <SccAuxPath>SAK</SccAuxPath>
+   <SccLocalPath>SAK</SccLocalPath>
+ </PropertyGroup>
+ <PropertyGroup>
+   <TargetFramework>netcoreapp2.1</TargetFramework>
+ </PropertyGroup>  
+ <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+   <OutputPath>..\..\Presentation\Nop.Web\Plugins\Resanehlab.ProductComments</OutputPath>
+   <OutDir>$(OutputPath)</OutDir>
+ </PropertyGroup>
+ <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+   <OutputPath>..\..\Presentation\Nop.Web\Plugins\Resanehlab.ProductComments</OutputPath>
+   <OutDir>$(OutputPath)</OutDir>
+ </PropertyGroup>
+ <!-- This target execute after "Build" target -->
+ <Target Name="NopTarget" AfterTargets="Build">
+   <!-- Delete unnecessary libraries from plugins path -->
+   <MSBuild Projects="$(MSBuildProjectDirectory)\..\..\Build\ClearPluginAssemblies.proj" Properties="PluginPath=$(MSBuildProjectDirectory)\$(OutDir)" Targets="NopClear" />
+ </Target>
+ <ItemGroup>
+   <None Remove="Content\productComments.css" />
+   <None Remove="logo.png" />
+   <None Remove="plugin.json" />
+   <None Remove="Scripts\productComments.js" />
+   <None Remove="Views\Admin\Configure.cshtml" />
+   <None Remove="Views\Admin\ConfigureWidget.cshtml" />
+   <None Remove="Views\Admin\Edit.cshtml" />
+   <None Remove="Views\Admin\List.cshtml" />
+   <None Remove="Views\Admin\_CommentDetails.Info.cshtml" />
+   <None Remove="Views\_ProductCommentHelpfulness.cshtml" />
+   <None Remove="Views\_ProductComments.cshtml" />
+   <None Remove="Views\_ViewImports.cshtml" />
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="plugin.json">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Content\productComments.css">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Scripts\productComments.js">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Views\Admin\Configure.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Admin\ConfigureWidget.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Admin\Edit.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Admin\List.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\Admin\_CommentDetails.Info.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Views\_ProductCommentHelpfulness.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+   <Content Include="Views\_ProductComments.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="Views\_ViewImports.cshtml">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <Content Include="logo.png">
+     <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+   </Content>
+ </ItemGroup>
+ <ItemGroup>
+   <ProjectReference Include="..\..\Libraries\Nop.Core\Nop.Core.csproj">
+     <Private>false</Private>
+   </ProjectReference>
+   <ProjectReference Include="..\..\Libraries\Nop.Data\Nop.Data.csproj">
+     <Private>false</Private>
+   </ProjectReference>
+   <ProjectReference Include="..\..\Libraries\Nop.Services\Nop.Services.csproj">
+     <Private>false</Private>
+   </ProjectReference>
+   <ProjectReference Include="..\..\Presentation\Nop.Web.Framework\Nop.Web.Framework.csproj">
+     <Private>false</Private>
+   </ProjectReference>
+   <ProjectReference Include="..\..\Presentation\Nop.Web\Nop.Web.csproj">
+     <Private>false</Private>
+   </ProjectReference>
+ </ItemGroup>
+</Project>

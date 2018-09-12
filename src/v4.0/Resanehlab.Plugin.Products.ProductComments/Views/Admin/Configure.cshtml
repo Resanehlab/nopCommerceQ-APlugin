@@ -1,0 +1,73 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ConfigurationModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = T("Admin.Plugin.ProductComments").Text;
+
+    Html.SetActiveMenuItemSystemName("Resanehlab.Plugin.Products.ProductComments.Configuration");
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Plugin.ProductComments")
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+        </div>
+    </div>
+    <div class="content">
+        <div class="form-horizontal">
+            @await Component.InvokeAsync("StoreScopeConfiguration")
+            @Html.ValidationSummary(false)
+
+            <div class="raw clearfix">
+                <div class="panel-group">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            @T("Resanehlab.Plugin.Products.ProductComments.Configuration")
+                        </div>
+                        <div class="panel-body">
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-override-store-checkbox asp-for="EnablePlugin_OverrideForStore" asp-input="EnablePlugin" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                    <nop-label asp-for="EnablePlugin" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="EnablePlugin" />
+                                    <span asp-validation-for="EnablePlugin"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-override-store-checkbox asp-for="ProductCommentsMustBeApproved_OverrideForStore" asp-input="ProductCommentsMustBeApproved" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                    <nop-label asp-for="ProductCommentsMustBeApproved" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="ProductCommentsMustBeApproved" />
+                                    <span asp-validation-for="ProductCommentsMustBeApproved"></span>
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <div class="col-md-3">
+                                    <nop-override-store-checkbox asp-for="AllowAnonymousUsersToCommentProduct_OverrideForStore" asp-input="AllowAnonymousUsersToCommentProduct" asp-store-scope="@Model.ActiveStoreScopeConfiguration" />
+                                    <nop-label asp-for="AllowAnonymousUsersToCommentProduct" />
+                                </div>
+                                <div class="col-md-9">
+                                    <nop-editor asp-for="AllowAnonymousUsersToCommentProduct" />
+                                    <span asp-validation-for="AllowAnonymousUsersToCommentProduct"></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+

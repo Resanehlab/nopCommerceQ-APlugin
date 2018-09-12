@@ -1,0 +1,52 @@
+﻿@{
+    Layout = "~/Administration/Views/Shared/_AdminLayout.cshtml";
+    ViewBag.Title = T("Admin.Plugin.ProductComments").Text;
+}
+@model Resanehlab.Plugin.Products.ProductComments.Models.ConfigurationModel
+@using Nop.Web.Framework;
+@Html.Action("StoreScopeConfiguration", "Setting", new { area = "Admin" })
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="section-header">
+        <div class="title">
+            @T("Resanehlab.Plugin.Products.ProductComments.Configuration")
+        </div>
+        <div class="options">
+            <input type="submit" name="save" class="k-button" value="@T("Admin.Common.Save")" />
+        </div>
+    </div>
+
+    <table class="adminContent comment-info-tab">
+        <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.EnablePlugin_OverrideForStore, model => model.EnablePlugin, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.EnablePlugin)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.EnablePlugin)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.ProductCommentsMustBeApproved_OverrideForStore, model => model.ProductCommentsMustBeApproved, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.ProductCommentsMustBeApproved)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.ProductCommentsMustBeApproved)
+            </td>
+        </tr>
+        <tr>
+            <td class="adminTitle">
+                @Html.OverrideStoreCheckboxFor(model => model.AllowAnonymousUsersToCommentProduct_OverrideForStore, model => model.AllowAnonymousUsersToCommentProduct, Model.ActiveStoreScopeConfiguration)
+                @Html.NopLabelFor(model => model.AllowAnonymousUsersToCommentProduct)
+            </td>
+            <td class="adminData">
+                @Html.EditorFor(model => model.AllowAnonymousUsersToCommentProduct)
+            </td>
+        </tr>
+    </table>
+}
+

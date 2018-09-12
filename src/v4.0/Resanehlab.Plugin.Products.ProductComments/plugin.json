@@ -1,0 +1,11 @@
+﻿{
+  "Group": "Products",
+  "FriendlyName": "Q&A",
+  "SystemName": "Resanehlab.ProductComments",
+  "Version": "1.10",
+  "SupportedVersions": [ "4.00" ],
+  "Author": "Resanehlab",
+  "DisplayOrder": 1,
+  "FileName": "Resanehlab.Plugin.Products.ProductComments.dll",
+  "Description": "This plugin added a new widget to product details page that customers submit their questions there and can view other customers questions and admin answers and rate other questions, too."
+}

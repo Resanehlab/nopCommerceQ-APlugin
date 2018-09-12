@@ -1,0 +1,97 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentsModel
+
+@{
+    Html.AddScriptParts("~/Plugins/Resanehlab.ProductComments/Scripts/productComments.js");
+
+    Html.AddCssFileParts("~/Plugins/Resanehlab.ProductComments/Content/productComments.css");
+}
+
+<div class="productId-container" data-productid="@Model.ProductId" style="display:none"></div>
+
+<div id="updateProductCommentsTargetId" class="product-comments-page"
+     data-productcommentsaddnewurl="@Url.Action("ProductCommentsAddNew", "ProductComments")">
+    @if (Model.AddProductComment.SuccessfullyAdded)
+    {
+        <div class="submitCommentResult">
+            @Model.AddProductComment.Result
+        </div>
+    }
+    <div class="write-comment" id="comment-form">
+        <div class="title">
+            <strong>@T("Comments.Write")</strong>
+        </div>
+        @{
+            var validationSummary = Html.ValidationSummary(true);
+            if (!MvcHtmlString.IsNullOrEmpty(validationSummary))
+            {
+                <div class="message-error">@validationSummary</div>
+            }
+        }
+        <div class="form-fields">
+            <div class="inputs">
+                @Html.LabelFor(model => model.AddProductComment.CommentText, new { }, ":")
+                @Html.TextAreaFor(model => model.AddProductComment.CommentText, Model.AddProductComment.CanCurrentCustomerLeaveComment ? (object)(new { @class = "comment-text" }) : (object)(new { @class = "comment-text", disabled = "disabled" }))
+                @Html.ValidationMessageFor(model => model.AddProductComment.CommentText)
+            </div>
+        </div>
+        <div class="buttons">
+            @if (Model.AddProductComment.CanCurrentCustomerLeaveComment)
+            {
+                <input type="button" id="add-comment" name="add-comment" class="button-1 write-product-comment-button" value="@T("Comments.SubmitButton")" />
+            }
+            else
+            {
+                <input type="button" id="add-comment" disabled="disabled" name="add-comment" class="button-1 write-product-comment-button" value="@T("Comments.SubmitButton")" />
+            }
+        </div>
+    </div>
+    @if (Model.Items.Count > 0)
+    {
+        <div class="product-comment-list">
+            <div class="title">
+                <strong>@T("Comments.ExistingComments")</strong>
+            </div>
+            @foreach (var comment in Model.Items)
+            {
+                <div class="product-comment-item clearfix">
+                    <div class="comment-item-head">
+                        <div class="comment-info">
+                            <span class="user">
+                                <label>@T("Comments.From"):</label>
+                                @if (comment.AllowViewingProfiles)
+                                {
+                                    <a href="@Url.RouteUrl("CustomerProfile", new { id = comment.CustomerId })">@(comment.CustomerName)</a>
+                                }
+                                else
+                                {
+                                    <span>@comment.CustomerName</span>
+                                }
+                            </span>
+                            <span class="date">
+                                <label>@T("Comments.Date"):</label>
+                                <span>@comment.CreatedOnStr</span>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="comment-content">
+                        <div class="comment-text">
+                            @Html.Raw(Nop.Core.Html.HtmlHelper.FormatText(comment.CommentText, false, true, false, false, false, false))
+                        </div>
+                        @Html.Partial("~/Plugins/Resanehlab.ProductComments/Views/_ProductCommentHelpfulness.cshtml", comment.Helpfulness, new ViewDataDictionary())
+                        @if (!String.IsNullOrEmpty(comment.ReplyText))
+                            {
+                                <div class="reply">
+                                    <div class="reply-header">
+                                        @T("Comment.Reply"):
+                                    </div>
+                                    <div class="reply-text">
+                                        @Html.Raw(Nop.Core.Html.HtmlHelper.FormatText(comment.ReplyText, false, true, false, false, false, false))
+                                    </div>
+                                </div>
+                            }
+                    </div>
+                </div>
+            }
+        </div>
+    }
+</div>

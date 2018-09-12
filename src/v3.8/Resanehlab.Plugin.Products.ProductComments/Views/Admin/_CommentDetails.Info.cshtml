@@ -1,0 +1,69 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentModel
+
+@Html.ValidationSummary(false)
+@Html.HiddenFor(model => model.Id)
+
+<script>
+    $(document).ready(function () {
+        bindBootstrapTabSelectEvent('comment-edit');
+    });
+</script>
+
+<div class="content">
+    <div class="form-horizontal">
+        <div id="comment-edit" class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+                @Html.RenderBootstrapTabHeader("tab-info", @T("Admin.Plugin.ProductComments.Info"), true)
+            </ul>
+            <div class="tab-content">
+                @Html.RenderBootstrapTabContent("tab-info", @TabInfo(), true)
+            </div>
+        </div>
+    </div>
+</div>
+
+@helper TabInfo()
+{
+    <div class="panel-group">
+        <div>
+            <div class="panel-body">
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ProductName)
+                    </div>
+                    <div class="col-md-9">
+                        <a href="@Url.RouteUrl("Product", new {SeName = Model.ProductSeName})" target="_blank">
+                            @Html.NopDisplayFor(model => model.ProductName)
+                        </a>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.CommentText)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopDisplayFor(model => model.CommentText)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.ReplyText)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopTextAreaFor(x => x.ReplyText)
+                        @Html.ValidationMessageFor(model => model.ReplyText)
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-3">
+                        @Html.NopLabelFor(model => model.IsApproved)
+                    </div>
+                    <div class="col-md-9">
+                        @Html.NopEditorFor(x => x.IsApproved)
+                        @Html.ValidationMessageFor(model => model.IsApproved)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

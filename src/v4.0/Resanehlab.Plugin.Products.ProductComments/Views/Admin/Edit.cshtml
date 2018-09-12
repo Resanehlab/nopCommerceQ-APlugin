@@ -1,0 +1,33 @@
+﻿@model Resanehlab.Plugin.Products.ProductComments.Models.ProductCommentModel
+
+@{
+    Layout = "~/Areas/Admin/Views/Shared/_AdminLayout.cshtml";
+    //page title
+    ViewBag.Title = T("Admin.Plugin.ProductComments.EditCommentDetails").Text;
+}
+@using (Html.BeginForm(null, null, FormMethod.Post, new { id = "admin-comment-form" }))
+{
+    @Html.AntiForgeryToken()
+    <div class="content-header clearfix">
+        <h1 class="pull-left">
+            @T("Admin.Plugin.ProductComments.EditCommentDetails")
+            <small><i class="fa fa-arrow-circle-left"></i>@Html.ActionLink(T("Admin.Plugin.ProductComments.BackToList").Text, "List")</small>
+        </h1>
+        <div class="pull-right">
+            <button type="submit" name="save" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.Save")
+            </button>
+            <button type="submit" name="save-continue" class="btn bg-blue">
+                <i class="fa fa-floppy-o"></i>
+                @T("Admin.Common.SaveContinue")
+            </button>
+            <span id="comment-delete" class="btn bg-red">
+                <i class="fa fa-trash-o"></i>
+                @T("Admin.Common.Delete")
+            </span>
+        </div>
+    </div>
+    @await Html.PartialAsync("~/Plugins/Resanehlab.ProductComments/Views/Admin/_CommentDetails.Info.cshtml", Model)
+}
+<nop-delete-confirmation asp-model-id="@Model.Id" asp-button-id="comment-delete" />
